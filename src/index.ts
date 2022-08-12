@@ -1,16 +1,22 @@
-import { Hono } from "hono";
+import { app } from "./app";
 
-const app = new Hono();
 
-const port = parseInt(process.env.PORT) || 3000;
+const port = parseInt(process.env.PORT) || 3003;
+const host = parseInt(process.env.HOST) || '0.0.0.0';
 
-const home = app.get("/", (c) => {
-  return c.json({ message: "Hello World!" });
-});
-
-console.log(`Running at http://localhost:${port}`);
+console.log(`Running at http://${host}:${port}`);
 
 export default {
   port,
-  fetch: home.fetch,
+  host,
+  fetch: app.fetch,
 };
+
+// const exitApp = async (err: any) => {
+//   !!err && console.error(err);
+//   process.exit(err ? 1 : 0);
+  
+// }
+// process.on('unhandledRejection', exitApp);
+// process.on('SIGINT', exitApp);
+
