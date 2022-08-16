@@ -1,18 +1,19 @@
-import { Context, Hono } from "hono";
-const { MD4, MD5, SHA1, SHA224, SHA256, SHA384, SHA512, SHA512_256 } = Bun;
-import { getCommandInput } from "../commons/inputs";
-import { CommandResponse } from "../domain/commands";
+import { Context, Hono } from 'https://deno.land/x/hono/mod.ts';
+import { getCommandInput } from "../commons/inputs.ts";
+import { CommandResponse } from "../domain/commands.ts";
+import { Hash } from "https://deno.land/std@0.151.0/node/crypto.ts";
 
 
-const HASH_OPERATIONS = {
-    SHA256: SHA256,
-    SHA512: SHA512,
-    SHA1: SHA1,
-    SHA224: SHA224,
-    SHA512_256: SHA512_256,
-    SHA384: SHA384,
-    MD4: MD4,
-    MD5: MD5
+
+const HASH_OPERATIONS : Record<string, () => Hash> = {
+    sha256: () => new Hash('sha256'),
+    sha512: () => new Hash('sha512'),
+    sha1: () => new Hash('sha1'),
+    sha224: () => new Hash('sha224'),
+    sha384: () => new Hash('sha384'),
+    md5: () => new Hash('md5'),
+    ripemd160: () => new Hash('ripemd160'),
+    rmd160: () => new Hash('rmd160'),
 };
 
 const VALID_ACTIONS = Object.keys(HASH_OPERATIONS);
@@ -25,9 +26,9 @@ hashRoutes.get("/", (c: Context) => {
 });
 
 hashRoutes.get("/:action", (c: Context) => {
-  const input = getCommandInput(c, VALID_ACTIONS, ['text']);
+  const input = getCommandInput(c, { validActions: VALID_ACTIONS, paramsName: ['text']});
 
-  const Hasher = HASH_OPERATIONS[input.action];
-  const result = new Hasher().update(input.params.text).digest('hex');
+  const hasher = HASH_OPERATIONS[input.action]();
+  const result = hasher.update(input.params.text as string).digest('hex');
   return c.json(<CommandResponse>{result, input});
 });

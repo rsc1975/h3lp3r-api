@@ -1,18 +1,17 @@
 {
   "version": "0.1.0",
   "name": "h3lp3r-api",
-  "devDependencies": {
-    "@types/crypto-js": "^4.1.1",
-    "bun-types": "latest",
-    "nodemon": "^2.0.19"
-  },
   "dependencies": {
     "@ngneat/falso": "^6.1.0",
     "crypto-js": "^4.1.1",
     "hono": "^2.0.0"
   },
+  "devDependencies": {
+    "@types/crypto-js": "^4.1.1",
+    "nodemon": "^2.0.19"
+  },
   "scripts": {
-    "start": "bun run src/index.ts"
+    "start": "deno run src/index.ts"
   },
   "module": "src/index.js"
 }

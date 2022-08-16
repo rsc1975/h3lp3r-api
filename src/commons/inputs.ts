@@ -1,21 +1,30 @@
-import { Context } from "hono";
-import { CommandInput } from "../domain/commands";
+import { Context } from 'https://deno.land/x/hono/mod.ts';
 
+import { CommandInput } from "../domain/commands.ts";
 
-export const getCommandInput = (ctx: Context, validActions: string[], paramsName:string[], mandatoryParams?:string[] ): CommandInput => {
-    const action = ctx.req.param('action')?.toUpperCase();
+export interface RequestInputOptions {
+    validActions?: string[];
+    paramsName:string[];
+    mandatoryParams?:string[];
+    actionParamName?:string;
+    action?:string;
+}
+
+export const getCommandInput = (ctx: Context, opts: RequestInputOptions ): CommandInput => {
+    const action = opts.action || ctx.req.param(opts.actionParamName || 'action')?.toLowerCase();
     
-    if (!action || !validActions.includes(action)) {
-        ctx.set('response-status', 400);      
+    if (!opts.action && !opts.validActions?.includes(action)) {
+        ctx.set('response-status', 400);
+
         throw new Error(`Invalid action: '${action}'`);
     }
-    if (!mandatoryParams) {
-        mandatoryParams = paramsName;
+    if (!opts.mandatoryParams) {
+        opts.mandatoryParams = opts.paramsName;
     }
-    const params = {}
-    for (const param of paramsName) {
+    const params : any = {}
+    for (const param of opts.paramsName) {
         const value = ctx.req.query(param);
-        if (value === undefined && mandatoryParams.includes(param)) {
+        if (value === undefined && opts.mandatoryParams.includes(param)) {
             ctx.set('response-status', 400);      
             throw new Error(`Missing parameter: '${param}'`);
         } else {

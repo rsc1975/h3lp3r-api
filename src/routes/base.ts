@@ -1,34 +1,30 @@
-import CryptoJS from "crypto-js";
-import { Hono } from "hono";
-import { getCommandInput } from "../commons/inputs";
 
-CryptoJS
 
-const BASE_OPERATIONS = {
-  ENCODE: (text: string) => {
-    return CryptoJS.enc.Base64.stringify(CryptoJS.enc.Utf8.parse(text));
-  },
-  DECODE: (textBase64: string) => {
-    return CryptoJS.enc.Base64.parse(textBase64).toString(CryptoJS.enc.Utf8);
-  },
+import { Context, Hono } from 'https://deno.land/x/hono/mod.ts';
+
+import { getCommandInput } from "../commons/inputs.ts";
+import { CommandResponse } from '../domain/commands.ts';
+
+const BASE_OPERATIONS : Record<string, (s: string) => string> = {
+  encode: (text: string) => btoa(text),
+  decode: (textBase64: string) => atob(textBase64),
 };
 
 const VALID_ACTIONS = Object.keys(BASE_OPERATIONS);
 
-
 export const baseRoutes = new Hono();
 
-baseRoutes.get("/", (c) => {
+baseRoutes.get("/", (c: Context) => {
   return c.text('Base commands');
 });
 
-baseRoutes.get("/64/:action", (c) => {
+baseRoutes.get("/64/:action", (c: Context) => {
 
-  const input = getCommandInput(c, VALID_ACTIONS, ['text']);
+  const input = getCommandInput(c, {validActions: VALID_ACTIONS, paramsName: ['text']});
 
   const coderAction = BASE_OPERATIONS[input.action];
-
-  return c.text(coderAction(input.params.text));
+  const result = coderAction(input.params.text as string);
+  return c.json(<CommandResponse>{result, input});
 });
 
 

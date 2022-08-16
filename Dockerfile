@@ -1,3 +1,4 @@
+ARG H3LP3R_VERSION
 FROM dvlprtech/bun:latest
 
 RUN mkdir /app
@@ -7,6 +8,7 @@ COPY src/ ./src/
 COPY package.json ./
 RUN bun install
 
+ENV H3LP3R_VERSION $H3LP3R_VERSION
 ENV PORT 3003
 ENV HOST localhost
 EXPOSE $PORT
