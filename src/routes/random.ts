@@ -17,6 +17,8 @@ function normalizeQuestion(question: string) : string {
 
 const MAX_NAMES_GENERATED = 1000;
 
+
+// deno-lint-ignore no-explicit-any
 const RANDOM_ACTIONS : Record<string, (...args: any[]) => string | number | Array<any>> = {
   int: (min: number, max: number) => (Math.floor(Math.random() * (max - min + 1)) + min),
   decimal: (min: number, max: number) => (Math.random() * (max - min) + min),

@@ -1,4 +1,4 @@
-import { serve } from 'https://deno.land/std/http/server.ts'
+import { serve } from "https://deno.land/std@0.152.0/http/server.ts"
 
 import { app } from "./app.ts";
 
@@ -15,16 +15,6 @@ export default {
 };
 
 serve(app.fetch, { port, hostname });
-// const exitApp = async (err: any) => {
-//   !!err && console.error(err);
-//   process.exit(err ? 1 : 0);
-  
-// }
-// process.on('unhandledRejection', exitApp);
-// process.on('SIGINT', exitApp);
 
-// process.on('SIGINT', () => {
-//   process.exit(1);
-// });
 
 

@@ -1,6 +1,7 @@
-import { Context } from 'https://deno.land/x/hono/mod.ts';
+import { Context } from "https://deno.land/x/hono@v2.0.8/mod.ts";
 
 import { CommandInput } from "../domain/commands.ts";
+import { RESPONSE_STATUS_KEY } from "../domain/misc.ts";
 
 export interface RequestInputOptions {
     validActions?: string[];
@@ -14,18 +15,17 @@ export const getCommandInput = (ctx: Context, opts: RequestInputOptions ): Comma
     const action = opts.action || ctx.req.param(opts.actionParamName || 'action')?.toLowerCase();
     
     if (!opts.action && !opts.validActions?.includes(action)) {
-        ctx.set('response-status', 400);
-
+        ctx.set(RESPONSE_STATUS_KEY, 400);
         throw new Error(`Invalid action: '${action}'`);
     }
     if (!opts.mandatoryParams) {
         opts.mandatoryParams = opts.paramsName;
     }
-    const params : any = {}
+    const params : Record<string, unknown> = {}
     for (const param of opts.paramsName) {
         const value = ctx.req.query(param);
         if (value === undefined && opts.mandatoryParams.includes(param)) {
-            ctx.set('response-status', 400);      
+            ctx.set(RESPONSE_STATUS_KEY, 400);      
             throw new Error(`Missing parameter: '${param}'`);
         } else {
             params[param] = value;

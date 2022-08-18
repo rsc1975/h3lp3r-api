@@ -13,3 +13,7 @@ export interface GeneratedName {
     lastName: string;
 }
 
+export const SERVER_TEXT = 'H3lp3r API';
+export const PRETTY_PARAM = '_pretty';
+export const RESPONSE_STATUS_KEY = 'response-status';
+export const RESPONSE_TIME_HEADER = 'X-Response-Time';

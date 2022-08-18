@@ -1,17 +1,9 @@
-# Hono with Bun runtime
+# Hono with deno runtime
 
 ## Getting Started
 
-### Cloning the repo
-
 ```sh
-bun create hono ./NAME_HERE
+deno run src/index.ts
 ```
 
-### Development
-```
-bun run start
-```
-
-Open http://localhost:3000 with your browser to see the result.
-
+Deployed at: http://api.h3lp3r.com

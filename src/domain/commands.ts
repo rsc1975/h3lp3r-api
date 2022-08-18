@@ -5,6 +5,9 @@ export interface CommandInput {
 	params: Record<string, string | number | boolean>;
 }
 
+
+type ResultType = string | number | boolean | Array<unknown> | Record<string, unknown>;
+
 export interface CommandResponse {
 
     /**
@@ -19,7 +22,7 @@ export interface CommandResponse {
     /**
      * The command result
      */
-	result: any;
+	result: ResultType;
 }
 
 export interface ErrorResponse {
@@ -34,5 +37,5 @@ export interface ErrorResponse {
     /**
      * The request params.
      */
-	params: Record<string, any>;
+     params: Record<string, string | string[]>;
 }

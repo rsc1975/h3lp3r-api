@@ -1,4 +1,4 @@
-import { Context, Hono } from 'https://deno.land/x/hono/mod.ts';
+import { Context, Hono } from "https://deno.land/x/hono@v2.0.8/mod.ts";
 import { getCommandInput } from "../commons/inputs.ts";
 import { CommandResponse } from "../domain/commands.ts";
 import { Hash } from "https://deno.land/std@0.151.0/node/crypto.ts";

@@ -1,9 +1,10 @@
-import { Context, Hono } from 'https://deno.land/x/hono/mod.ts';
+import { Context, Hono } from "https://deno.land/x/hono@v2.0.8/mod.ts";
 
 import { getCommandInput } from "../commons/inputs.ts";
 import { CommandResponse } from "../domain/commands.ts";
 
-const CONVERT_OPERATIONS : Record<string, any> = {
+// deno-lint-ignore no-explicit-any
+const CONVERT_OPERATIONS : Record<string, (...args:any[]) => string> = {
   epoch: (value: number | string, unit: 'ms' | 'sec') => {
     value = +value * (unit === 'sec' ? 1000 : 1);
     return new Date(value).toISOString();
