@@ -14,10 +14,15 @@ export default {
   fetch: app.fetch,
 };
 
-console.log('hrtime:', (await Deno.permissions.query({ name: "hrtime" })).state);
+const listeningTxt = () => console.log(`✅♾️  ➡️ Server listening at http://${hostname}:${port}`);
 
+Deno.addSignalListener("SIGINT", () => {  
+  console.log("⏹️ ➡️ Server interrupted!");
+  console.log(`⏱️ ➡️ Server was running for: ${(performance.now()/1000).toFixed(1)}s`);
+  
+  Deno.exit();
+});
 
-serve(app.fetch, { port, hostname });
-
+serve(app.fetch, { port, hostname, onListen: listeningTxt });
 
 
