@@ -19,9 +19,9 @@ app.use('*', async (c: Context, next: Next) => {
     const start = performance.now();
     await next(); 
     
-    const elapsed = performance.now() - start;
+    const elapsed = (performance.now() - start) * 1000;
     
-    c.res.headers.set(RESPONSE_TIME_HEADER, `${elapsed.toFixed(2)} us`);
+    c.res.headers.set(RESPONSE_TIME_HEADER, `${elapsed.toFixed(1)} ns`);
 });
 
 app.use('*', cors())

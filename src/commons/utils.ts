@@ -11,12 +11,10 @@ export const getVersion = async () : Promise<string> => {
             _currentVersion = Deno.env.get('H3LP3R_VERSION')!;
         } else {
 
-            const pkgLocatios :string[] = ['../package.json', './package.json', join(Deno.cwd(), 'package.json'), join(__currentdir, '..','..', 'package.json')];
+            const pkgLocatios :string[] = ['../version.txt', './version.txt', join(Deno.cwd(), 'version.txt'), join(__currentdir, '..','..', 'version.txt')];
             for (const pkgLocation of pkgLocatios) {
                 try {
-                    const content = await Deno.readFile(pkgLocation);
-                    const pkg = JSON.parse(new TextDecoder().decode(content));
-                    _currentVersion = pkg.version;
+                    _currentVersion = (await Deno.readFile(pkgLocation)).toString().trim();
                     break;
                 } catch (_) {
                     // Empty
