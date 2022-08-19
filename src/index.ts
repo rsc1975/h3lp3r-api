@@ -14,6 +14,9 @@ export default {
   fetch: app.fetch,
 };
 
+console.log('hrtime:', (await Deno.permissions.query({ name: "hrtime" })).state);
+
+
 serve(app.fetch, { port, hostname });
 
 
