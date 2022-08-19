@@ -10,19 +10,25 @@ import { hashRoutes } from "./routes/hash.ts";
 import { randomRoutes } from "./routes/random.ts";
 import { PRETTY_PARAM, RESPONSE_STATUS_KEY, RESPONSE_TIME_HEADER } from "./domain/misc.ts";
 import { infoRoutes } from "./routes/info.ts";
-import { rootHandler, rootRoutes } from "./routes/root.ts";
+import { rootRoutes } from "./routes/root.ts";
 
 export const CONTEXT_PATH = '/api'
 
 export const app = new Hono({"strict": true});
 
+const usemicros = (await Deno.permissions.query({ name: "hrtime"})).state === "granted";
+const quiet = Deno.env.get("QUIET") === "true";
+
 app.use('*', async (c: Context, next: Next) => {
     const start = performance.now();
     await next(); 
     
-    const elapsed = (performance.now() - start) * 1000;
-    
-    c.res.headers.set(RESPONSE_TIME_HEADER, `${elapsed.toFixed(1)} ns`);
+    const elapsed = (performance.now() - start);
+    const elapsedTxt = usemicros ? `${(elapsed*1000).toFixed(0)} us` : `${elapsed.toFixed(2)} ms`;
+    c.res.headers.set(RESPONSE_TIME_HEADER, elapsedTxt);
+    if (!quiet) {        
+        console.log(`📥 [${c.req.method}] ➡️ {status: ${c.res.status}, time: ${elapsedTxt}} - ${c.req.url} `);
+    }
 });
 
 app.use('*', cors())
