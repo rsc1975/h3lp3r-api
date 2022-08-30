@@ -7,7 +7,7 @@ COPY src/ ./src/
 COPY version.txt ./
 
 ENV PORT 3003
-ENV HOST localhost
+ENV HOST 0.0.0.0
 EXPOSE $PORT
 
 RUN echo -e '#!/bin/sh\n\
