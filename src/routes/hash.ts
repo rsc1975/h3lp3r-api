@@ -1,19 +1,18 @@
-import { Context, Hono } from "https://deno.land/x/hono@v2.0.8/mod.ts";
-import { getCommandInput } from "../commons/inputs.ts";
-import { CommandResponse } from "../domain/commands.ts";
-import { Hash } from "https://deno.land/std@0.151.0/node/crypto.ts";
+import { Context, Hono } from "hono";
+import { getCommandInput } from "../commons/inputs";
+import { CommandResponse } from "../domain/commands";
+
+import { SHA1, SHA224, SHA256, SHA384, SHA512, MD5 } from "bun";
 
 
 
-const HASH_OPERATIONS : Record<string, () => Hash> = {
-    sha256: () => new Hash('sha256'),
-    sha512: () => new Hash('sha512'),
-    sha1: () => new Hash('sha1'),
-    sha224: () => new Hash('sha224'),
-    sha384: () => new Hash('sha384'),
-    md5: () => new Hash('md5'),
-    ripemd160: () => new Hash('ripemd160'),
-    rmd160: () => new Hash('rmd160'),
+const HASH_OPERATIONS : Record<string, Function> = {
+    sha256: () => new SHA256(),
+    sha512: () => new SHA512(),
+    sha1: () => new SHA1(),
+    sha224: () => new SHA224(),
+    sha384: () => new SHA384(),
+    md5: () => new MD5(),
 };
 
 

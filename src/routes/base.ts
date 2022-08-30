@@ -1,9 +1,9 @@
 
 
-import { Context, Hono } from "https://deno.land/x/hono@v2.0.8/mod.ts";
+import { Context, Hono } from "hono";
 
-import { getCommandInput } from "../commons/inputs.ts";
-import { CommandResponse } from '../domain/commands.ts';
+import { getCommandInput } from "../commons/inputs";
+import { CommandResponse } from '../domain/commands';
 
 const BASE_OPERATIONS : Record<string, (s: string) => string> = {
   encode: (text: string) => btoa(text),

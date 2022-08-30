@@ -1,10 +1,10 @@
 //import { randEmail, randFirstName, randLastName, randUuid } from "@ngneat/falso";
-import { randEmail, randFirstName, randLastName, randUuid }  from 'https://cdn.skypack.dev/@ngneat/falso';
-import { Context, Hono } from "https://deno.land/x/hono@v2.0.8/mod.ts";
+import { randEmail, randFirstName, randLastName, randUuid }  from '@ngneat/falso';
+import { Context, Hono } from "hono";
 
-import { getCommandInput } from "../commons/inputs.ts";
-import { CommandResponse } from "../domain/commands.ts";
-import { GeneratedName, OracleResponse, OracleType } from "../domain/misc.ts";
+import { getCommandInput } from "../commons/inputs";
+import { CommandResponse } from "../domain/commands";
+import { GeneratedName, OracleResponse, OracleType } from "../domain/misc";
 
 
 function strHashcode(text: string): number {

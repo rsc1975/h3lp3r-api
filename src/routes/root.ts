@@ -1,7 +1,7 @@
-import { Context, Hono } from "https://deno.land/x/hono@v2.0.8/mod.ts";
+import { Context, Hono } from "hono";
 
-import { getCallerIP, getVersion } from "../commons/utils.ts";
-import { SERVER_TEXT } from "../domain/misc.ts";
+import { getCallerIP, getVersion } from "../commons/utils";
+import { SERVER_TEXT } from "../domain/misc";
 
 export const rootRoutes = new Hono();
 

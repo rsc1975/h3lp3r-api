@@ -1,23 +1,23 @@
-import { Context, Hono, Next } from "https://deno.land/x/hono@v2.0.8/mod.ts";
+import { Context, Hono, Next } from "hono";
 
-import { cors } from "https://deno.land/x/hono@v2.0.8/middleware.ts";
+import { cors } from "hono/cors";
 
-import { getPathFromURL } from "./commons/inputs.ts";
-import { ErrorResponse } from "./domain/commands.ts";
-import { baseRoutes } from "./routes/base.ts";
-import { convRoutes } from "./routes/convert.ts";
-import { hashRoutes } from "./routes/hash.ts";
-import { randomRoutes } from "./routes/random.ts";
-import { PRETTY_PARAM, RESPONSE_STATUS_KEY, RESPONSE_TIME_HEADER } from "./domain/misc.ts";
-import { infoRoutes } from "./routes/info.ts";
-import { rootRoutes } from "./routes/root.ts";
+import { getPathFromURL } from "./commons/inputs";
+import { ErrorResponse } from "./domain/commands";
+import { baseRoutes } from "./routes/base";
+import { convRoutes } from "./routes/convert";
+import { hashRoutes } from "./routes/hash";
+import { randomRoutes } from "./routes/random";
+import { PRETTY_PARAM, RESPONSE_STATUS_KEY, RESPONSE_TIME_HEADER } from "./domain/misc";
+import { infoRoutes } from "./routes/info";
+import { rootRoutes } from "./routes/root";
 
 export const CONTEXT_PATH = '/api'
 
 export const app = new Hono({"strict": true});
 
-const usemicros = (await Deno.permissions.query({ name: "hrtime"})).state === "granted";
-const quiet = Deno.env.get("QUIET") === "true";
+const usemicros = true
+const quiet = process.env.QUIET === "true";
 
 app.use('*', async (c: Context, next: Next) => {
     const start = performance.now();

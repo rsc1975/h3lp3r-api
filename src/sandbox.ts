@@ -1,7 +1,4 @@
-import { createRequire } from "https://deno.land/std/node/module.ts";
 
-const require = createRequire(import.meta.url);
-
-const mongoose = require('mongoose');
-
-console.log(mongoose.version);
+const val = new Bun.MD5().update('Elite');
+console.log(typeof val); // Shows "string"
+console.log(val.digest('hex')); // TypeError: val.digest is not a function.

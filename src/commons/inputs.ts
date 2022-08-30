@@ -1,7 +1,7 @@
-import { Context } from "https://deno.land/x/hono@v2.0.8/mod.ts";
+import { Context } from "hono";
 
-import { CommandInput } from "../domain/commands.ts";
-import { RESPONSE_STATUS_KEY } from "../domain/misc.ts";
+import { CommandInput } from "../domain/commands";
+import { RESPONSE_STATUS_KEY } from "../domain/misc";
 
 export interface RequestInputOptions {
     validActions?: string[];

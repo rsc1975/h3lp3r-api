@@ -1,7 +1,7 @@
-import { Context, Hono } from "https://deno.land/x/hono@v2.0.8/mod.ts";
+import { Context, Hono } from "hono";
 
-import { getCommandInput } from "../commons/inputs.ts";
-import { CommandResponse } from "../domain/commands.ts";
+import { getCommandInput } from "../commons/inputs";
+import { CommandResponse } from "../domain/commands";
 
 // deno-lint-ignore no-explicit-any
 const CONVERT_OPERATIONS : Record<string, (...args:any[]) => string> = {

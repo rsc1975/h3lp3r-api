@@ -1,5 +1,5 @@
 {
-  "version": "0.1.0",
+  "version": "0.0.3",
   "name": "h3lp3r-api",
   "dependencies": {
     "@ngneat/falso": "^6.1.0",

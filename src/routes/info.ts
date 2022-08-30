@@ -1,8 +1,8 @@
-import { Context, Hono } from "https://deno.land/x/hono@v2.0.8/mod.ts";
+import { Context, Hono } from "hono";
 
-import { getCommandInput } from "../commons/inputs.ts";
-import { getCallerIP } from "../commons/utils.ts";
-import { CommandResponse } from "../domain/commands.ts";
+import { getCommandInput } from "../commons/inputs";
+import { getCallerIP } from "../commons/utils";
+import { CommandResponse } from "../domain/commands";
 
 
 const INFO_OPERATIONS : Record<string, (c: Context) => string> = {
@@ -26,8 +26,8 @@ infoRoutes.get("/:action", (c: Context) => {
 });
 
 const echoFn = async (c: Context) => {
-  const payload = await c.req.json() || {};
-  return c.json(<CommandResponse>{...payload});
+  const payload : Record<string, unknown> = await c.req.json() || {};
+  return c.json({...payload});
 }
 infoRoutes.post("/echo", echoFn);
 infoRoutes.put("/echo", echoFn);
