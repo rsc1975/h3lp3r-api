@@ -16,6 +16,7 @@ const HASH_OPERATIONS : Record<string, () => Hash> = {
     rmd160: () => new Hash('rmd160'),
 };
 
+
 const VALID_ACTIONS = Object.keys(HASH_OPERATIONS);
 
 
@@ -32,3 +33,5 @@ hashRoutes.get("/:action", (c: Context) => {
   const result = hasher.update(input.params.text as string).digest('hex');
   return c.json(<CommandResponse>{result, input});
 });
+
+

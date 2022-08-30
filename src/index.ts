@@ -14,15 +14,14 @@ export default {
   fetch: app.fetch,
 };
 
-const listeningTxt = () => console.log(`✅♾️  ➡️ Server listening at http://${hostname}:${port}`);
+const listeningTxt = () => console.log(`✅♾️ ➡️ Server listening at http://${hostname}:${port}`);
 
 Deno.addSignalListener("SIGINT", () => {  
-  console.log("⏹️ ➡️ Server interrupted!");
+  console.log("❌ ➡️ Server interrupted!");
   console.log(`⏱️ ➡️ Server was running for: ${(performance.now()/1000).toFixed(1)}s`);
   
   Deno.exit();
 });
 
 serve(app.fetch, { port, hostname, onListen: listeningTxt });
-
 
