@@ -1,13 +1,11 @@
-
-
 import { Context, Hono } from "hono";
 
 import { getCommandInput } from "../commons/inputs";
 import { CommandResponse } from '../domain/commands';
 
 const BASE_OPERATIONS : Record<string, (s: string) => string> = {
-  encode: (text: string) => btoa(text),
-  decode: (textBase64: string) => atob(textBase64),
+  encode: (text: string) => Buffer.from(text).toString("base64"),
+  decode: (textBase64: string) => Buffer.from(textBase64, 'base64').toString("utf8"),
 };
 
 const VALID_ACTIONS = Object.keys(BASE_OPERATIONS);
