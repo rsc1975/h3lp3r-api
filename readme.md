@@ -1,9 +1,9 @@
-# Hono with deno runtime
+# Hono with Bun runtime
 
 ## Getting Started
 
 ```sh
-deno run src/index.ts
+bun run src/index.ts
 ```
 
-Deployed at: http://api.h3lp3r.com
+
