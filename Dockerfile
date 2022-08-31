@@ -1,4 +1,4 @@
-FROM dvlprtech/bun:latest
+FROM dvlprtech/bun:canary
 
 RUN mkdir /app
 WORKDIR /app
@@ -7,6 +7,7 @@ COPY src/ ./src/
 COPY package.json ./
 RUN bun install
 
+ENV QUIET ""
 ENV PORT 3003
 ENV HOST 0.0.0.0
 EXPOSE $PORT

@@ -17,7 +17,7 @@ export const CONTEXT_PATH = '/api'
 export const app = new Hono({"strict": true});
 
 const usemicros = true
-const quiet = process.env.QUIET === "true";
+const quiet = ''+process.env.QUIET === "true";
 
 app.use('*', async (c: Context, next: Next) => {
     const start = performance.now();
