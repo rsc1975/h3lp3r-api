@@ -6,7 +6,7 @@ import { SERVER_TEXT } from "../domain/misc";
 export const rootRoutes = new Hono();
 
 export const rootHandler = async (c: Context) => {
-  return c.json({ server: SERVER_TEXT, version: await getVersion() });
+  return c.json({ server: SERVER_TEXT, version: await getVersion(), platform: {bun: process.version} });
 }
 
 rootRoutes.get('', rootHandler);
