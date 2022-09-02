@@ -8,7 +8,7 @@ import { SERVER_TEXT } from "../domain/misc.ts";
 export const rootRoutes = new Hono();
 
 export const rootHandler = async (c: Context) => {
-  return c.json({ server: SERVER_TEXT, version: await getVersion(), platform: Deno.version });
+  return c.json({ server: SERVER_TEXT, version: await getVersion(), platform: {deno: Deno.version.deno } });
 }
 
 rootRoutes.get('', rootHandler);
