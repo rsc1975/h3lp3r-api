@@ -18,7 +18,6 @@ export const app = new Hono({"strict": true});
 
 const usemicros = (await Deno.permissions.query({ name: "hrtime"})).state === "granted";
 const quiet = Deno.env.get("QUIET") === "true";
-
 app.use('*', async (c: Context, next: Next) => {
     const start = performance.now();
     await next(); 

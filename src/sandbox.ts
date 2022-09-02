@@ -1,7 +1,5 @@
-import { createRequire } from "https://deno.land/std/node/module.ts";
+import { platform } from "https://deno.land/std@0.151.0/node/_process/process.ts";
 
-const require = createRequire(import.meta.url);
-
-const mongoose = require('mongoose');
-
-console.log(mongoose.version);
+if (globalThis.Deno) {
+    console.log(Deno.version);
+}

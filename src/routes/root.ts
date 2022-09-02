@@ -1,12 +1,14 @@
+import { platform } from "https://deno.land/std@0.151.0/node/_process/process.ts";
 import { Context, Hono } from "https://deno.land/x/hono@v2.0.8/mod.ts";
 
 import { getCallerIP, getVersion } from "../commons/utils.ts";
 import { SERVER_TEXT } from "../domain/misc.ts";
 
+
 export const rootRoutes = new Hono();
 
 export const rootHandler = async (c: Context) => {
-  return c.json({ server: SERVER_TEXT, version: await getVersion() });
+  return c.json({ server: SERVER_TEXT, version: await getVersion(), platform: Deno.version });
 }
 
 rootRoutes.get('', rootHandler);

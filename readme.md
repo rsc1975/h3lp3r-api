@@ -3,7 +3,5 @@
 ## Getting Started
 
 ```sh
-deno run src/index.ts
+deno run -A src/index.ts
 ```
-
-Deployed at: http://api.h3lp3r.com
