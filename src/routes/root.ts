@@ -15,6 +15,9 @@ rootRoutes.get("/ip", (c: Context) => {
     return c.text(getCallerIP(c));
 });
 
+rootRoutes.get("/ping", (c: Context) => {        
+  return c.text('PONG');
+});
 
 
 
