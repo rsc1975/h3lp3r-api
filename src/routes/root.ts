@@ -14,7 +14,11 @@ export const rootHandler = async (c: Context) => {
 rootRoutes.get('', rootHandler);
 
 rootRoutes.get("/ip", (c: Context) => {        
-    return c.text(getCallerIP(c));
+  return c.text(getCallerIP(c));
+});
+
+rootRoutes.get("/ping", (c: Context) => {        
+  return c.text('PONG');
 });
 
 
