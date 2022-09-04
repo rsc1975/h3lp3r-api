@@ -3,5 +3,5 @@
 ## Getting Started
 
 ```sh
-deno run -A src/index.ts
+deno run -A --unstable src/index.ts
 ```
