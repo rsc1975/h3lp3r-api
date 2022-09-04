@@ -1,5 +1,4 @@
-import { platform } from "https://deno.land/std@0.151.0/node/_process/process.ts";
-import { Context, Hono } from "https://deno.land/x/hono@v2.0.8/mod.ts";
+import { Context, Hono } from "../deps.ts";
 
 import { getCallerIP, getVersion } from "../commons/utils.ts";
 import { SERVER_TEXT } from "../domain/misc.ts";

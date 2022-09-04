@@ -1,6 +1,6 @@
 //import { randEmail, randFirstName, randLastName, randUuid } from "@ngneat/falso";
-import { randEmail, randFirstName, randLastName, randUuid }  from 'https://cdn.skypack.dev/@ngneat/falso';
-import { Context, Hono } from "https://deno.land/x/hono@v2.0.8/mod.ts";
+import { randEmail, randFirstName, randLastName, randUuid }  from '../deps.ts';
+import { Context, Hono } from "../deps.ts";
 
 import { getCommandInput } from "../commons/inputs.ts";
 import { CommandResponse } from "../domain/commands.ts";

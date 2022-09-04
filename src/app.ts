@@ -1,6 +1,6 @@
-import { Context, Hono, Next } from "https://deno.land/x/hono@v2.0.8/mod.ts";
+import { Context, Hono, Next } from "./deps.ts";
 
-import { cors } from "https://deno.land/x/hono@v2.0.8/middleware.ts";
+import { cors } from "./deps.ts";
 
 import { getPathFromURL } from "./commons/inputs.ts";
 import { ErrorResponse } from "./domain/commands.ts";
