@@ -28,6 +28,9 @@ app.use('*', async (c: Context, next: Next) => {
     if (!quiet) {        
         console.log(`📥 [${c.req.method}] ➡️ {status: ${c.res.status}, time: ${elapsedTxt}} - ${c.req.url} `);
     }
+    // In Bun these headers doesn't exist so we remove in deno
+    c.res.headers.delete('vary');
+    c.res.headers.delete('date');
 });
 
 app.use('*', cors())
