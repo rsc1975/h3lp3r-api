@@ -1,4 +1,3 @@
-import { serve } from "https://deno.land/std@0.152.0/http/server.ts"
 
 import { app } from "./app.ts";
 
@@ -23,5 +22,5 @@ Deno.addSignalListener("SIGINT", () => {
   Deno.exit();
 });
 
-serve(app.fetch, { port, hostname, onListen: listeningTxt });
+Deno.serve(app.fetch, { port, hostname, onListen: listeningTxt });
 
