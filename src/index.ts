@@ -1,5 +1,6 @@
 
 import { app } from "./app.ts";
+import { serve } from "./deps.ts";
 
 
 const port = +(Deno.env.get('PORT') || 3003);
@@ -22,5 +23,5 @@ Deno.addSignalListener("SIGINT", () => {
   Deno.exit();
 });
 
-Deno.serve(app.fetch, { port, hostname, onListen: listeningTxt });
+serve(app.fetch, { port, hostname, onListen: listeningTxt });
 
