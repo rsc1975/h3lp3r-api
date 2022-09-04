@@ -29,6 +29,8 @@ app.use('*', async (c: Context, next: Next) => {
     if (!quiet) {        
         console.log(`📥 [${c.req.method}] ➡️ {status: ${c.res.status}, time: ${elapsedTxt}} - ${c.req.url} `);
     }
+    // deno add the following header
+    c.res.headers.set("date", new Date().toUTCString());
 });
 
 app.use('*', cors())
