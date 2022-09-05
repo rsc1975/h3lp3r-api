@@ -24,4 +24,3 @@ Deno.addSignalListener("SIGINT", () => {
 });
 
 serve(app.fetch, { port, hostname, onListen: listeningTxt });
-

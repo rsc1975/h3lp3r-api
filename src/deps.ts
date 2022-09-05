@@ -1,6 +1,6 @@
-export { type Context, Hono, type Next } from "https://deno.land/x/hono@v2.1.3/mod.ts";
+export { type Context, Hono, type Next } from "https://deno.land/x/hono@v2.1.4/mod.ts";
 
-export { cors } from "https://deno.land/x/hono@v2.1.3/middleware.ts";
+export { cors } from "https://deno.land/x/hono@v2.1.4/middleware.ts";
 
 export { randEmail, randFirstName, randLastName, randUuid }  from 'https://cdn.skypack.dev/@ngneat/falso';
 
