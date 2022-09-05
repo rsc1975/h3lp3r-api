@@ -19,6 +19,12 @@ export const app = new Hono({"strict": true});
 const usemicros = true
 const quiet = ''+process.env.QUIET === "true";
 
+app.use('*', async (c: Context, next: Next) => {
+    // deno add the following header
+    await next();
+    c.res.headers.set("date", new Date().toUTCString());
+});
+
 app.use(`${CONTEXT_PATH}/*`, async (c: Context, next: Next) => {
     const start = performance.now();
     await next(); 
