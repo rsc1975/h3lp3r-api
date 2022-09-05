@@ -39,12 +39,12 @@ export function getCallerIP(c: Context) {
 }
 
 
-declare global {
-    interface Request<ParamKeyType extends string = string> {
-      
-      _searchParams?: Record<string, string>;
-    }
-}
+//declare global {
+//    interface Request<ParamKeyType extends string = string> {
+//      
+//      _searchParams?: Record<string, string>;
+//    }
+//}
 
 export const customRequest = () => {
     function* _pairsGenerator(url: string, idx: number) : Generator<string> {
@@ -81,13 +81,13 @@ export const customRequest = () => {
       }
 
     Request.prototype.query = function (this: Request, key?: string) {
-        if (!this._searchParams) {
-            this._searchParams = _getSearchParams(this.url);
-        }
+        
+        const searchParams = _getSearchParams(this.url);
+        //console.log(searchParams);
         if (key) {
-          return this._searchParams[key];
+          return searchParams[key];
         } else {
-          return this._searchParams;
+          return searchParams;
         }
       } as InstanceType<typeof Request>['query']
     

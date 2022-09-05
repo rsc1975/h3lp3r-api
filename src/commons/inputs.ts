@@ -22,8 +22,9 @@ export const getCommandInput = (ctx: Context, opts: RequestInputOptions ): Comma
         opts.mandatoryParams = opts.paramsName;
     }
     const params : Record<string, unknown> = {}
+    const searchParams = opts.paramsName?.length > 0 ? ctx.req.query() : {};
     for (const param of opts.paramsName) {
-        const value = ctx.req.query(param);
+        const value = searchParams[param];
         if (value === undefined && opts.mandatoryParams.includes(param)) {
             ctx.set(RESPONSE_STATUS_KEY, 400);      
             throw new Error(`Missing parameter: '${param}'`);
