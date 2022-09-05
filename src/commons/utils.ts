@@ -37,3 +37,58 @@ export function getCallerIP(c: Context) {
     || c.env.remoteAddr?.hostname || 'unknown';
     return remoteIp.split(',')[0].trim();
 }
+
+
+declare global {
+    interface Request<ParamKeyType extends string = string> {
+      
+      _searchParams?: Record<string, string>;
+    }
+}
+
+export const customRequest = () => {
+    function* _pairsGenerator(url: string, idx: number) : Generator<string> {
+        let from = idx;
+        while(idx > 0) {
+          idx = url.indexOf('&', from +1)
+          if (idx === -1) {
+            yield url.substring(from+1);
+          } else {
+            yield url.substring(from+1, idx);
+          }
+          from = idx;
+        }  
+      }
+      
+      const _getSearchParams = (url: string): Record<string, string> => {
+        const idx = url.indexOf('?');
+        if (idx === -1) {
+          return {};
+        }
+        const params: Record<string, string> = {};
+        for (const pair of _pairsGenerator(url, idx)) {
+          if (pair) {
+            const sep = pair.indexOf('=');
+            if (sep === -1) {
+              params[decodeURIComponent(pair)] = '';
+            } else {
+              params[decodeURIComponent(pair.substring(0, sep))] = decodeURIComponent(pair.substring(sep + 1));
+            }
+          }
+        }
+      
+        return params;
+      }
+
+    Request.prototype.query = function (this: Request, key?: string) {
+        if (!this._searchParams) {
+            this._searchParams = _getSearchParams(this.url);
+        }
+        if (key) {
+          return this._searchParams[key];
+        } else {
+          return this._searchParams;
+        }
+      } as InstanceType<typeof Request>['query']
+    
+}

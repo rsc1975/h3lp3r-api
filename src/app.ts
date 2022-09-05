@@ -11,8 +11,11 @@ import { randomRoutes } from "./routes/random.ts";
 import { PRETTY_PARAM, RESPONSE_STATUS_KEY, RESPONSE_TIME_HEADER } from "./domain/misc.ts";
 import { infoRoutes } from "./routes/info.ts";
 import { rootRoutes } from "./routes/root.ts";
+import { customRequest } from "./commons/utils.ts";
 
 export const CONTEXT_PATH = '/api'
+
+customRequest();
 
 export const app = new Hono({"strict": true});
 
