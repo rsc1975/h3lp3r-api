@@ -19,7 +19,7 @@ export const app = new Hono({"strict": true});
 const usemicros = true
 const quiet = ''+process.env.QUIET === "true";
 
-app.use(`${CONTEXT_PATH/*`, async (c: Context, next: Next) => {
+app.use(`${CONTEXT_PATH}/*`, async (c: Context, next: Next) => {
     const start = performance.now();
     await next(); 
     
@@ -33,12 +33,12 @@ app.use(`${CONTEXT_PATH/*`, async (c: Context, next: Next) => {
     c.res.headers.set("date", new Date().toUTCString());
 });
 
-app.use(`${CONTEXT_PATH/*`, cors());
+app.use(`${CONTEXT_PATH}/*`, cors());
 
 // This is an optimization to avoid the call to c.req.query 
 const hasSearchParams = (req: Request) => req.url.indexOf('?', 10) > -1;
 
-app.use(`${CONTEXT_PATH/*`, async (c: Context, next: Next) => {
+app.use(`${CONTEXT_PATH}/*`, async (c: Context, next: Next) => {
     const pretty = !!(hasSearchParams(c.req) && (c.req.query(PRETTY_PARAM) || c.req.query(PRETTY_PARAM) === ''));
     c.pretty(pretty, 2);
     await next();     
