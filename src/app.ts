@@ -11,6 +11,9 @@ import { randomRoutes } from "./routes/random";
 import { PRETTY_PARAM, RESPONSE_STATUS_KEY, RESPONSE_TIME_HEADER } from "./domain/misc";
 import { infoRoutes } from "./routes/info";
 import { rootRoutes } from "./routes/root";
+import { customRequest } from "./commons/utils";
+
+customRequest();
 
 export const CONTEXT_PATH = '/api'
 
