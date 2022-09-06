@@ -1,5 +1,5 @@
 import { Hono, type Context } from "https://deno.land/x/hono@v2.1.4/mod.ts";
-import { serve } from "https://deno.land/std@0.151.0/http/server.ts";
+
 
 const port = +(Deno.env.get('PORT') || 3003);
 const hostname = Deno.env.get('HOST') || '0.0.0.0';

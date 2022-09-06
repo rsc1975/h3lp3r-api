@@ -1,5 +1,5 @@
-import { join, dirname, fromFileUrl } from "https://deno.land/std@0.152.0/path/mod.ts";
-import { Context } from "../deps.ts";
+
+import { Context, dirname, fromFileUrl } from "../deps.ts";
 
 const __currentdir = dirname(fromFileUrl(import.meta.url));
 

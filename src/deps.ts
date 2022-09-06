@@ -4,6 +4,7 @@ export { cors } from "https://deno.land/x/hono@v2.1.4/middleware.ts";
 
 export { randEmail, randFirstName, randLastName, randUuid }  from 'https://cdn.skypack.dev/@ngneat/falso';
 
-export { Hash } from "https://deno.land/std@0.151.0/node/crypto.ts";
+export { Hash } from "https://deno.land/std@0.154.0/node/crypto.ts";
+export { serve } from "https://deno.land/std@0.154.0/http/server.ts";
 
-export { serve } from "https://deno.land/std@0.151.0/http/server.ts";
+export { join, dirname, fromFileUrl } from "https://deno.land/std@0.152.0/path/mod.ts";
