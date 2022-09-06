@@ -1,5 +1,5 @@
-import { Context } from "https://deno.land/x/hono@v2.0.8/mod.ts";
 
+import { Context } from "../deps.ts";
 import { CommandInput } from "../domain/commands.ts";
 import { RESPONSE_STATUS_KEY } from "../domain/misc.ts";
 
