@@ -85,7 +85,7 @@ randomRoutes.get("/oracle", (c: Context) => {
 });
 
 randomRoutes.get("/names", (c: Context) => {
-  const input = getCommandInput(c, { paramsName: ['total', 'gender'], action: 'names' });
+  const input = getCommandInput(c, { paramsName: ['total', 'gender'], mandatoryParams: ['total'], action: 'names' });
   const result = RANDOM_ACTIONS[input.action](input.params.total, input.params.gender);
   return c.json(<CommandResponse>{ result, input });
 });
